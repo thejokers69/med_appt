@@ -64,10 +64,18 @@ const GiveReviews = () => {
           <textarea id="review-text" name="review" rows={5} value={form.review} onChange={onChange} required />
         </div>
       </fieldset>
-      <button className="btn btn-primary" type="submit" disabled={busy || submitted}>
-        {submitted ? 'Review submitted' : busy ? 'Sending…' : 'Submit review'}
-      </button>
-      {submitted && <p className="success-note">This form is disabled because your review was sent.</p>}
+      {submitted ? (
+        <>
+          <button className="btn btn-primary" type="button" disabled>
+            Review submitted
+          </button>
+          <p className="success-note">Your review has been submitted. The submit button is now disabled.</p>
+        </>
+      ) : (
+        <button className="btn btn-primary" type="submit" disabled={busy}>
+          {busy ? 'Sending…' : 'Submit review'}
+        </button>
+      )}
     </form>
   )
 }
